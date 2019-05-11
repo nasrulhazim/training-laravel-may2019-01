@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -76,7 +77,16 @@ class UserController extends Controller
             'name' => 'required|min:4|max:255'
         ]);
 
-        $user->update($request->only('name'));
+        $data = $request->only('name');
+
+        if($request->has('password') && !empty($request->password)) {
+            $this->validate($request, [
+                'password' => 'required|confirmed|min:8|max:255'
+            ]);
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
 
         return redirect()->route('users.show', $user);
 

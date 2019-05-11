@@ -18,12 +18,32 @@
 								<input class="form-control @error('name') border border-danger @enderror" 
 									type="text" name="name" 
 									value="{{ $user->name }}">
-									
+
 								@error('name')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+							</td>
+						</tr>
+						<tr>
+							<th>Password</th>
+							<td>
+								<input class="form-control @error('password') border border-danger @enderror" 
+									type="password" name="password" >
+									
+								@error('password')
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+							</td>
+						</tr>
+						<tr>
+							<th>Confirm Password</th>
+							<td>
+								<input class="form-control" 
+									type="password" name="password_confirmation">
 							</td>
 						</tr>
 						<tr>
