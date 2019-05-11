@@ -4,7 +4,12 @@
 	<div class="container">
 		<div class="row bg-white">
 			<div class="col p-5">
-				<h3>Users</h3>
+				<h3 class="pb-4">Users 
+					<a href="{{ route('users.create') }}" 
+						class="float-right btn btn-success">
+						{{ __('Create New User') }}
+					</a>
+				</h3>
 				<div class="float-right">
 					{{ $users->links() }}
 				</div>

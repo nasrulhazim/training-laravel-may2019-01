@@ -5,19 +5,15 @@
 		<div class="row bg-white">
 			<div class="col p-5">
 				<h3>{{ __('User Details') }}</h3>
-				<form action="{{ route('users.update', $user) }}" method="POST">
-					{{-- enctype="multipart/form-data" --}}
+				<form action="{{ route('users.store') }}" method="POST">
 					@csrf 
-					{{-- <input type="hidden" name="_token" value="3412345ysdf"> --}}
-					@method('PUT')
-					{{-- <input type="hidden" name="_method" value="PUT"> --}}
 					<table class="table">
 						<tr>
-							<th>Name</th>
+							<th>{{ __('Name') }}</th>
 							<td>
 								<input class="form-control @error('name') border border-danger @enderror" 
 									type="text" name="name" 
-									value="{{ $user->name }}">
+									value="{{ old('name') }}">
 
 								@error('name')
                                     <span class="text-danger">
@@ -27,7 +23,21 @@
 							</td>
 						</tr>
 						<tr>
-							<th>Password</th>
+							<th>{{ __('Email') }}</th>
+							<td>
+								<input class="form-control @error('email') border border-danger @enderror" 
+									type="text" name="email" 
+									value="{{ old('email') }}">
+
+								@error('email')
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+							</td>
+						</tr>
+						<tr>
+							<th>{{ __('Password') }}</th>
 							<td>
 								<input class="form-control @error('password') border border-danger @enderror" 
 									type="password" name="password" >
@@ -40,23 +50,19 @@
 							</td>
 						</tr>
 						<tr>
-							<th>Confirm Password</th>
+							<th>{{ __('Confirm Password') }}</th>
 							<td>
 								<input class="form-control" 
 									type="password" name="password_confirmation">
 							</td>
 						</tr>
-						<tr>
-							<th>E-mail</th>
-							<td>{{ $user->email }}</td>
-						</tr>
 					</table>
 					<div class="float-right">
-						<a href="{{ route('users.show', $user) }}" class="btn btn-default">
+						<a href="{{ route('users.index') }}" class="btn btn-default">
 							{{ __('Back') }}
 						</a>
 						<button type="submit" class="btn btn-primary">
-                            {{ __('Update') }}
+                            {{ __('Create') }}
                         </button>
 					</div>
 				</form>
