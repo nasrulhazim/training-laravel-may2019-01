@@ -21,14 +21,22 @@
 							<td>
 								<div class="btn-group">
 									<a href="{{ route('users.show', $user) }}" class="btn btn-primary">
-										Show
+										{{ __('Show') }}
 									</a>
 									<a href="{{ route('users.edit', $user) }}" class="btn btn-success">
-										Edit
+										{{ __('Edit') }}
 									</a>
-									<div class="btn btn-danger">
-										Delete
-									</a>
+									<div class="btn btn-danger" onclick="
+										if(confirm('Are you sure want to delete this record?')) {
+											document.getElementById('user-{{ $user->id }}').submit();
+										}
+									">
+										<form id="user-{{ $user->id }}" 
+											action="{{ route('users.destroy', $user) }}" method="POST">
+											@csrf @method('DELETE')
+										</form>
+										{{ __('Delete') }}
+									</div>
 								</div>
 							</td>
 						</tr>

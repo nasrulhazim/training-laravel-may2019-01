@@ -100,6 +100,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        // check if current logged in user, is the user we want to delete, abort.
+        abort_if($user->id == auth()->user()->id, 403);
+
+        $user->delete();
+
+        return redirect()->route('users.index');
     }
 }
