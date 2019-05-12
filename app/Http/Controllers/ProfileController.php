@@ -14,7 +14,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $profiles = Profile::with('user')->paginate();
+        return view('profiles.index', compact('profiles'));
     }
 
     /**
@@ -24,7 +25,8 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        $users = \App\User::doesntHave('profile')->get();
+        return view('profiles.create', compact('users'));
     }
 
     /**
