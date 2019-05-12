@@ -36,3 +36,18 @@ Seed specific seeder class:
 ```
 $ php artisan db:seed --class=DevelopmentSeeder
 ```
+
+Eloquent: Eager Load
+
+```
+$ php artisan tinker
+>>> $user = \App\User::with('profile')->first();
+```
+
+Eloquent: Lazy Load
+
+```
+$ php artisan tinker
+>>> $user = \App\User::first();
+>>> $user->load('profile');
+```
