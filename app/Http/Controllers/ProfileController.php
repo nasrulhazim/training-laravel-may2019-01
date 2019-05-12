@@ -121,6 +121,8 @@ class ProfileController extends Controller
      */
     public function destroy(Profile $profile)
     {
-        //
+        $profile->delete();
+
+        return redirect()->route('profiles.index');
     }
 }
