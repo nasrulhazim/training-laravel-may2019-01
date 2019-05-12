@@ -30,7 +30,7 @@ class ProfileController extends Controller
         if($users->count() == 0) {
             return redirect()->route('profiles.index');
         }
-        
+
         return view('profiles.create', compact('users'));
     }
 
@@ -42,7 +42,24 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'gender' => 'required',
+            'race' => 'required',
+            'dob' => 'required',
+            'religion' => 'required',
+        ]);
+        
+        $profile = \App\Profile::updateOrCreate([
+            'user_id' => $request->user_id,
+        ], [
+           'gender' => $request->gender,
+            'race' => $request->race,
+            'dob' => $request->dob,
+            'religion' => $request->religion, 
+        ]);
+
+        return redirect()->route('profiles.show', $profile);
     }
 
     /**
@@ -53,7 +70,7 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        //
+        return view('profiles.show', compact('profile'));
     }
 
     /**
@@ -64,7 +81,7 @@ class ProfileController extends Controller
      */
     public function edit(Profile $profile)
     {
-        //
+        return view('profiles.edit', compact('profile'));
     }
 
     /**
@@ -76,7 +93,24 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'gender' => 'required',
+            'race' => 'required',
+            'dob' => 'required',
+            'religion' => 'required',
+        ]);
+        
+        $profile = \App\Profile::updateOrCreate([
+            'user_id' => $request->user_id,
+        ], [
+           'gender' => $request->gender,
+            'race' => $request->race,
+            'dob' => $request->dob,
+            'religion' => $request->religion, 
+        ]);
+
+        return redirect()->route('profiles.show', $profile);
     }
 
     /**
