@@ -26,6 +26,11 @@ class ProfileController extends Controller
     public function create()
     {
         $users = \App\User::doesntHave('profile')->get();
+
+        if($users->count() == 0) {
+            return redirect()->route('profiles.index');
+        }
+        
         return view('profiles.create', compact('users'));
     }
 
