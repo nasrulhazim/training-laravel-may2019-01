@@ -58,6 +58,8 @@ class UserController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
+        alert()->success(__('User has been added.'), __('Add User'));
+
         return redirect()->route('users.show', $user);
     }
 
@@ -107,6 +109,8 @@ class UserController extends Controller
 
         $user->update($data);
 
+        alert()->success(__('User has been updated.'), __('Update User'));
+
         return redirect()->route('users.show', $user);
 
     }
@@ -123,6 +127,8 @@ class UserController extends Controller
         abort_if($user->id == auth()->user()->id, 403);
 
         $user->delete();
+
+        alert()->success(__('User has been removed.'), __('Remove User'));
 
         return redirect()->route('users.index');
     }

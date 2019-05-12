@@ -64,6 +64,8 @@ class ProfileController extends Controller
             'religion' => $request->religion, 
         ]);
 
+        alert()->success(__('Profile has been added.'), __('Add Profile'));
+
         return redirect()->route('profiles.show', $profile);
     }
 
@@ -115,6 +117,8 @@ class ProfileController extends Controller
             'religion' => $request->religion, 
         ]);
 
+        alert()->success(__('Profile has been updated.'), __('Update Profile'));
+
         return redirect()->route('profiles.show', $profile);
     }
 
@@ -127,6 +131,8 @@ class ProfileController extends Controller
     public function destroy(Profile $profile)
     {
         $profile->delete();
+
+        alert()->success(__('Profile has been delete.'), __('Delete Profile'));
 
         return redirect()->route('profiles.index');
     }
